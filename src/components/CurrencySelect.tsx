@@ -1,12 +1,20 @@
-import React, { type ChangeEvent, type ReactElement, useState } from 'react'
+import React, { type ChangeEvent, type FC, type ReactElement } from 'react'
 import currencies, { type Currency, defaultCurrency } from '../constants/currencies'
+import { useAppDispatch } from '../redux/hooks'
+import { type PayloadAction } from '@reduxjs/toolkit'
 
-const CurrencySelect = (): ReactElement => {
-  const [selectedCurrency, setSelectedCurrency] = useState<Currency >(defaultCurrency)
+interface CurrencySelectProps {
+  selectedCurrency: Currency
+  setNewCurrency: (currency: Currency) => PayloadAction<Currency>
+}
+const CurrencySelect: FC<CurrencySelectProps> = ({ selectedCurrency, setNewCurrency }): ReactElement => {
+  const dispatch = useAppDispatch()
 
   const handleSelectCurrency = (e: ChangeEvent<HTMLSelectElement>): void => {
     const newCurrency = e.target.value
-    setSelectedCurrency(currencies.find(item => item.label === newCurrency) ?? defaultCurrency)
+    const selectedCurrency = currencies.find(({ label }) => label === newCurrency) ?? defaultCurrency
+
+    dispatch(setNewCurrency(selectedCurrency))
   }
 
   return (
@@ -15,9 +23,6 @@ const CurrencySelect = (): ReactElement => {
      <label className="converter__select-label">
        <select className="converter__select" value={selectedCurrency?.label ?? 'USD'} onChange={handleSelectCurrency}>
          {currencies.map(({ label }) => <option key={label} value={label}>{label}</option>)}
-         <option value="RUB">RUB</option>
-         <option value="USD">USD</option>
-         <option value="RUB">EUR</option>
        </select>
      </label>
    </div>
