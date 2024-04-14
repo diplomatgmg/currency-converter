@@ -1,23 +1,40 @@
-import React, { type ReactElement } from 'react'
+import React, { type FormEvent, type ReactElement, useEffect, useState } from 'react'
 import SwapSvg from '../assets/svg/swap.svg'
 import Table from './Table'
 import FormInput from './FormInput'
 import CurrencySelect from './CurrencySelect'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import { setFromCurrency, setToCurrency } from '../redux/currencySlice'
+import { useConvertCurrencyQuery } from '../redux/api'
 
 const Form = (): ReactElement => {
+  const [isShouldFetch, setIsShouldFetch] = useState<boolean>(false)
+
   const { fromCurrency, toCurrency } = useAppSelector(state => state.currency)
 
   const dispatch = useAppDispatch()
+
+  const {
+    data,
+    isLoading
+  } = useConvertCurrencyQuery(fromCurrency.label, { skip: !isShouldFetch })
+
+  useEffect(() => {
+    setIsShouldFetch(false)
+  }, [fromCurrency, toCurrency])
 
   const handleSwapCurrency = (): void => {
     dispatch(setFromCurrency(toCurrency))
     dispatch(setToCurrency(fromCurrency))
   }
 
+  const handleSubmitForm = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault()
+    setIsShouldFetch(!isShouldFetch)
+  }
+
   return (
-    <form className="converter__form">
+    <form className="converter__form" onSubmit={handleSubmitForm}>
       <FormInput/>
 
       <div className="converter__conversion">
@@ -36,7 +53,7 @@ const Form = (): ReactElement => {
         </div>
       </div>
 
-      <Table/>
+      {data !== undefined && isShouldFetch && <Table data={data} isLoading={isLoading}/>}
 
       <button type="submit" className="converter__submit">Get Exchange Rate</button>
     </form>

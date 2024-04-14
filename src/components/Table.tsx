@@ -1,20 +1,31 @@
-import React, { type ReactElement } from 'react'
+import React, { type FC, type ReactElement } from 'react'
+import { type ConvertCurrencyResponse } from '../redux/api'
+import { useAppSelector } from '../redux/hooks'
 
-const Table = (): ReactElement => {
+interface TableProps {
+  isLoading: boolean
+  data: ConvertCurrencyResponse
+}
+
+const Table: FC<TableProps> = ({ isLoading, data }): ReactElement => {
+  const { amount, fromCurrency, toCurrency } = useAppSelector(state => state.currency)
+
+  if (isLoading || data === undefined) {
+    return <h1>Loading...</h1>
+  }
+
+  const conversionRate = Number(amount) * data.conversion_rates[toCurrency.label]
+
   return (
    <table className="converter__table">
      <tbody>
      <tr>
        <td>Date</td>
-       <td>14.04.2024, 19:25:10</td>
-     </tr>
-     <tr>
-       <td>Rate</td>
-       <td>1 $RUB = 0.053575 USD</td>
+       <td>{new Date(data.time_last_update_utc).toLocaleString()}</td>
      </tr>
      <tr>
        <td>Exchange</td>
-       <td>5 $RUB = 0.053575 USD</td>
+       <td>{amount} {fromCurrency.label} = {conversionRate} {toCurrency.label}</td>
      </tr>
      </tbody>
    </table>
