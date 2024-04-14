@@ -1,0 +1,184 @@
+$background: #262626;
+$background-second: #2d2d2d;
+$border-color: #575757;
+
+body {
+  font-family: sans-serif;
+
+  color: #fff;
+  background-color: $background-second;
+}
+
+.converter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  width: fit-content;
+  padding: 16px;
+
+  transform: translate(-50%, -50%);
+
+  border: 2px solid $border-color;
+  border-radius: 6px;
+  background: $background;
+
+  &__title {
+    font-size: 24px;
+    font-weight: 1000;
+
+    margin: 0 0 24px 0;
+
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: 2px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    gap: 8px;
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label-text {
+    font-size: 12px;
+
+    margin-bottom: 4px;
+    margin-left: 4px;
+  }
+
+  &__input,
+  &__select {
+    padding: 8px;
+
+    color: #fff;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    outline: none;
+    background-color: $background-second;
+  }
+
+  &__conversion {
+    display: flex;
+
+    width: 100%;
+
+    gap: 12px;
+  }
+
+  &__select-wrapper {
+    position: relative;
+  }
+
+  &__flag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    width: 20px;
+  }
+
+  &__from,
+  &__to {
+    width: 100%;
+  }
+
+  &__reverse {
+    position: relative;
+    top: 20px;
+
+    display: flex;
+
+    height: fit-content;
+    padding: 4px;
+
+    cursor: pointer;
+    transition: background-color 100ms;
+
+    border: 1px solid $border-color;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: $background-second;
+    }
+
+    img {
+      width: 20px;
+    }
+  }
+
+  &__select {
+    width: 100%;
+    padding-left: 36px;
+  }
+
+
+  &__table {
+    border-collapse: collapse;
+
+    text-align: center;
+    text-decoration: none;
+
+    & th {
+      font-size: 14px;
+      font-weight: normal;
+
+      color: #fff;
+      background-color: #000;
+    }
+
+    & td {
+      font-size: 13px;
+    }
+
+    & td,
+    & th {
+      line-height: 13px;
+
+      padding: 10px 5px;
+
+      vertical-align: middle;
+      white-space: pre-wrap;
+
+      border: 1px solid $border-color;
+    }
+
+    & tr:hover {
+      background-color: $background-second;
+    }
+
+    & tr:hover td {
+      cursor: default;
+    }
+  }
+
+
+  &__submit {
+    padding: 12px 0;
+
+    cursor: pointer;
+    transition: background-color 100ms;
+
+    color: white;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    background-color: $background;
+
+    &:hover {
+      background-color: $background-second;
+    }
+  }
+}
