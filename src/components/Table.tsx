@@ -1,6 +1,7 @@
 import React, { type FC, type ReactElement } from 'react'
 import { type ConvertCurrencyResponse } from '../redux/api'
 import { useAppSelector } from '../redux/hooks'
+import { formatCurrency } from '../utils'
 
 interface TableProps {
   isLoading: boolean
@@ -14,18 +15,20 @@ const Table: FC<TableProps> = ({ isLoading, data }): ReactElement => {
     return <h1>Loading...</h1>
   }
 
-  const conversionRate = (Number(amount) * data.conversion_rates[toCurrency.label]).toFixed(2)
+  const conversionRate = data.conversion_rates[toCurrency.label]
+  const convertedAmount = formatCurrency(Number(amount) * conversionRate, true)
+  const formattedDate = new Date(data.time_last_update_utc).toLocaleString()
 
   return (
    <table className="converter__table">
      <tbody>
      <tr>
        <td>Date</td>
-       <td>{new Date(data.time_last_update_utc).toLocaleString()}</td>
+       <td>{formattedDate}</td>
      </tr>
      <tr>
        <td>Exchange</td>
-       <td>{amount} {fromCurrency.label} = {conversionRate} {toCurrency.label}</td>
+       <td>{formatCurrency(amount)} {fromCurrency.label} = {convertedAmount} {toCurrency.label}</td>
      </tr>
      </tbody>
    </table>

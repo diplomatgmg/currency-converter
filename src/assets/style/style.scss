@@ -180,5 +180,10 @@ body {
     &:hover {
       background-color: $background-second;
     }
+
+    &:disabled {
+      cursor: help;
+      background-color: $border-color;
+    }
   }
 }

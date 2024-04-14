@@ -10,7 +10,7 @@ import { useConvertCurrencyQuery } from '../redux/api'
 const Form = (): ReactElement => {
   const [isShouldFetch, setIsShouldFetch] = useState<boolean>(false)
 
-  const { fromCurrency, toCurrency } = useAppSelector(state => state.currency)
+  const { amount, fromCurrency, toCurrency } = useAppSelector(state => state.currency)
 
   const dispatch = useAppDispatch()
 
@@ -55,7 +55,7 @@ const Form = (): ReactElement => {
 
       {data !== undefined && isShouldFetch && <Table data={data} isLoading={isLoading}/>}
 
-      <button type="submit" className="converter__submit">Get Exchange Rate</button>
+      <button type="submit" className="converter__submit" disabled={amount === ''}>Get Exchange Rate</button>
     </form>
   )
 }
