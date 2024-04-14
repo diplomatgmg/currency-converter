@@ -6,14 +6,17 @@ body {
   font-family: sans-serif;
 
   color: #fff;
-  background-color: $background-second;
+  background-image: url('../img/currencies.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  transform: scale(1.5);
+  overflow: hidden;
 }
 
 .converter {
-  position: absolute;
-  top: 50%;
-  left: 50%;
 
+  margin: 30vh auto 0;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -22,7 +25,6 @@ body {
   width: fit-content;
   padding: 16px;
 
-  transform: translate(-50%, -50%);
 
   border: 2px solid $border-color;
   border-radius: 6px;
