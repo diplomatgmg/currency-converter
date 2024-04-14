@@ -5,26 +5,32 @@ $border-color: #575757;
 body {
   font-family: sans-serif;
 
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
+  margin: 0 auto;
+
   color: #fff;
   background-image: url('../img/currencies.jpg');
   background-repeat: no-repeat;
-  background-size: cover;
   background-attachment: fixed;
-  transform: scale(1.5);
-  overflow: hidden;
+  background-size: cover;
 }
 
 .converter {
-
-  margin: 30vh auto 0;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
 
   width: fit-content;
+  margin: auto 0;
   padding: 16px;
 
+  transform: scale(1.75);
 
   border: 2px solid $border-color;
   border-radius: 6px;
