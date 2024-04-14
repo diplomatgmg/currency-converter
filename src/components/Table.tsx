@@ -14,7 +14,7 @@ const Table: FC<TableProps> = ({ isLoading, data }): ReactElement => {
     return <h1>Loading...</h1>
   }
 
-  const conversionRate = Number(amount) * data.conversion_rates[toCurrency.label]
+  const conversionRate = (Number(amount) * data.conversion_rates[toCurrency.label]).toFixed(2)
 
   return (
    <table className="converter__table">
