@@ -1,4 +1,4 @@
-import { type Currency, defaultCurrency } from '../constants/currencies'
+import { type Currency, defaultFromCurrency, defaultToCurrency } from '../constants/currencies'
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
 interface CurrencyState {
@@ -9,8 +9,8 @@ interface CurrencyState {
 
 const initialCurrencyState: CurrencyState = {
   amount: '',
-  fromCurrency: defaultCurrency,
-  toCurrency: defaultCurrency
+  fromCurrency: defaultFromCurrency,
+  toCurrency: defaultToCurrency
 }
 
 const currencySlice = createSlice({

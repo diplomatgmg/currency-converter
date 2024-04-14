@@ -166,8 +166,11 @@ interface Currency {
 }
 
 // eslint-disable-next-line
-const defaultCurrency = currencies.find(({ label }) => label === 'USD')!
+const defaultFromCurrency = currencies.find(({label}) => label === 'USD')!
+
+// eslint-disable-next-line
+const defaultToCurrency = currencies.find(({ label }) => label === 'RUB')!
 
 export default currencies
-export { defaultCurrency }
+export { defaultFromCurrency, defaultToCurrency }
 export type { Currency }

@@ -30,7 +30,7 @@ const Form = (): ReactElement => {
 
   const handleSubmitForm = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
-    setIsShouldFetch(!isShouldFetch)
+    setIsShouldFetch(true)
   }
 
   return (

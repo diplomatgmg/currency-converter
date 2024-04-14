@@ -1,5 +1,5 @@
 import React, { type ChangeEvent, type FC, type ReactElement } from 'react'
-import currencies, { type Currency, defaultCurrency } from '../constants/currencies'
+import currencies, { type Currency, defaultFromCurrency } from '../constants/currencies'
 import { useAppDispatch } from '../redux/hooks'
 import { type PayloadAction } from '@reduxjs/toolkit'
 
@@ -12,7 +12,7 @@ const CurrencySelect: FC<CurrencySelectProps> = ({ selectedCurrency, setNewCurre
 
   const handleSelectCurrency = (e: ChangeEvent<HTMLSelectElement>): void => {
     const newCurrency = e.target.value
-    const selectedCurrency = currencies.find(({ label }) => label === newCurrency) ?? defaultCurrency
+    const selectedCurrency = currencies.find(({ label }) => label === newCurrency) ?? defaultFromCurrency
 
     dispatch(setNewCurrency(selectedCurrency))
   }
