@@ -3,11 +3,18 @@ import SwapSvg from '../assets/svg/swap.svg'
 import Table from './Table'
 import FormInput from './FormInput'
 import CurrencySelect from './CurrencySelect'
-import { useAppSelector } from '../redux/hooks'
+import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import { setFromCurrency, setToCurrency } from '../redux/currencySlice'
 
 const Form = (): ReactElement => {
   const { fromCurrency, toCurrency } = useAppSelector(state => state.currency)
+
+  const dispatch = useAppDispatch()
+
+  const handleSwapCurrency = (): void => {
+    dispatch(setFromCurrency(toCurrency))
+    dispatch(setToCurrency(fromCurrency))
+  }
 
   return (
     <form className="converter__form">
@@ -19,7 +26,7 @@ const Form = (): ReactElement => {
           <CurrencySelect selectedCurrency={fromCurrency} setNewCurrency={setFromCurrency}/>
         </div>
 
-        <div className="converter__reverse">
+        <div className="converter__reverse" onClick={handleSwapCurrency}>
           <img src={SwapSvg} alt=""/>
         </div>
 
